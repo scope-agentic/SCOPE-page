@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 1,
+  "id": "fb967c8c-cb38-49b4-9004-21f38f7c276e",
+  "source": "001_fb967c8c.html",
+  "goal": "put a newspaper in sofa",
+  "globalStep": 150.0,
+  "split": "val",
+  "reward": 10.0,
+  "won": null,
+  "initialObservation": "-= Welcome to TextWorld, ALFRED! =-\n\nYou are in the middle of a room. Looking quickly around you, you see a armchair 1, a cabinet 1, a drawer 21, a drawer 20, a drawer 19, a drawer 18, a drawer 17, a drawer 16, a drawer 15, a drawer 14, a drawer 13, a drawer 12, a drawer 11, a drawer 10, a drawer 9, a drawer 8, a drawer 7, a drawer 6, a drawer 5, a drawer 4, a drawer 3, a drawer 2, a drawer 1, a dresser 1, a garbagecan 1, a sidetable 5, a sidetable 4, a sidetable 3, a sidetable 2, a sidetable 1, and a sofa 1.\n\nYour task is to: put a newspaper in sofa.",
+  "containers": [
+    "armchair 1",
+    "cabinet 1",
+    "drawer 21",
+    "drawer 20",
+    "drawer 19",
+    "drawer 18",
+    "drawer 17",
+    "drawer 16",
+    "drawer 15",
+    "drawer 14",
+    "drawer 13",
+    "drawer 12",
+    "drawer 11",
+    "drawer 10",
+    "drawer 9",
+    "drawer 8",
+    "drawer 7",
+    "drawer 6",
+    "drawer 5",
+    "drawer 4",
+    "drawer 3",
+    "drawer 2",
+    "drawer 1",
+    "dresser 1",
+    "garbagecan 1",
+    "sidetable 5",
+    "sidetable 4",
+    "sidetable 3",
+    "sidetable 2",
+    "sidetable 1",
+    "sofa 1"
+  ],
+  "steps": [
+    {
+      "turn": 0,
+      "rawAction": "go to dresser 1",
+      "action": {
+        "type": "go",
+        "target": "dresser 1"
+      },
+      "observationBefore": "-= Welcome to TextWorld, ALFRED! =-\n\nYou are in the middle of a room. Looking quickly around you, you see a armchair 1, a cabinet 1, a drawer 21, a drawer 20, a drawer 19, a drawer 18, a drawer 17, a drawer 16, a drawer 15, a drawer 14, a drawer 13, a drawer 12, a drawer 11, a drawer 10, a drawer 9, a drawer 8, a drawer 7, a drawer 6, a drawer 5, a drawer 4, a drawer 3, a drawer 2, a drawer 1, a dresser 1, a garbagecan 1, a sidetable 5, a sidetable 4, a sidetable 3, a sidetable 2, a sidetable 1, and a sofa 1.\n\nYour task is to: put a newspaper in sofa.",
+      "observationAfter": "You arrive at dresser 1. On the dresser 1, you see a book 2, a cellphone 2, a remotecontrol 3, a statue 1, and a television 1.",
+      "modelOutput": "First, I need to find a newspaper. Newspapers are commonly found on dressers, tables, and shelves. The dresser 1 is a likely candidate, so I'll go there first. I'll check the sidetables and cabinets next, since they are also common locations for newspapers.",
+      "validAction": true,
+      "effectiveAction": true,
+      "reward": 0.0,
+      "won": null,
+      "stateEvidence": "next-observation",
+      "beforeSnapshot": 0,
+      "afterSnapshot": 1
+    },
+    {
+      "turn": 1,
+      "rawAction": "go to sidetable 1",
+      "action": {
+        "type": "go",
+        "target": "sidetable 1"
+      },
+      "observationBefore": "You arrive at dresser 1. On the dresser 1, you see a book 2, a cellphone 2, a remotecontrol 3, a statue 1, and a television 1.",
+      "observationAfter": "You arrive at sidetable 1. On the sidetable 1, you see a creditcard 1, and a desklamp 1.",
+      "modelOutput": "I need to find a newspaper, put it in the sofa. I've only visited the dresser so far, which doesn't have a newspaper. I should check the sidetables, cabinets, and remaining drawers next.",
+      "validAction": true,
+      "effectiveAction": true,
+      "reward": 0.0,
+      "won": null,
+      "stateEvidence": "next-observation",
+      "beforeSnapshot": 1,
+      "afterSnapshot": 2
+    },
+    {
+      "turn": 2,
+      "rawAction": "go to cabinet 1",
+      "action": {
+        "type": "go",
+        "target": "cabinet 1"
+      },
+      "observationBefore": "You arrive at sidetable 1. On the sidetable 1, you see a creditcard 1, and a desklamp 1.",
+      "observationAfter": "You arrive at cabinet 1. On the cabinet 1, you see nothing.",
+      "modelOutput": "I need to find a newspaper, put it in the sofa. I've already visited sidetable 1 (no newspaper), so I should visit the remaining furniture systematically. The most likely places for a newspaper are the cabinet, drawers, and sidetables. I'll check the cabinet, then the sidetables, and finally the remaining drawers.",
+      "validAction": true,
+      "effectiveAction": true,
+      "reward": 0.0,
+      "won": null,
+      "stateEvidence": "next-observation",
+      "beforeSnapshot": 2,
+      "afterSnapshot": 3
+    },
+    {
+      "turn": 3,
+      "rawAction": "go to sidetable 2",
+      "action": {
+        "type": "go",
+        "target": "sidetable 2"
+      },
+      "observationBefore": "You arrive at cabinet 1. On the cabinet 1, you see nothing.",
+      "observationAfter": "You arrive at sidetable 2. On the sidetable 2, you see a book 1.",
+      "modelOutput": "I need to find a newspaper, put it in the sofa. I have already visited cabinet 1 and sidetable 1, and have not yet checked sidetables 2-5, dresser 1, garbagecan 1, or sofa 1. I should visit sidetable 2-5 and the remaining drawers to find the newspaper.",
+      "validAction": true,
+      "effectiveAction": true,
+      "reward": 0.0,
+      "won": null,
+      "stateEvidence": "next-observation",
+      "beforeSnapshot": 3,
+      "afterSnapshot": 4
+    },
+    {
+      "turn": 4,
+      "rawAction": "go to sidetable 3",
+      "action": {
+        "type": "go",
+        "target": "sidetable 3"
+      },
+      "observationBefore": "You arrive at sidetable 2. On the sidetable 2, you see a book 1.",
+      "observationAfter": "You arrive at sidetable 3. On the sidetable 3, you see a newspaper 1.",
+      "modelOutput": "I need to find a newspaper, put it in the sofa. I have visited sidetable 2, cabinet 1, and dresser 1 already. I have not checked sidetable 3, sidetable 4, sidetable 5, or the remaining drawers. I should visit these locations next to find the newspaper.",
+      "validAction": true,
+      "effectiveAction": true,
+      "reward": 0.0,
+      "won": null,
+      "stateEvidence": "next-observation",
+      "beforeSnapshot": 4,
+      "afterSnapshot": 5
+    },
+    {
+      "turn": 5,
+      "rawAction": "take newspaper 1 from sidetable 3",
+      "action": {
+        "type": "take",
+        "object": "newspaper 1",
+        "target": "sidetable 3"
+      },
+      "observationBefore": "You arrive at sidetable 3. On the sidetable 3, you see a newspaper 1.",
+      "observationAfter": "You pick up the newspaper 1 from the sidetable 3.",
+      "modelOutput": "I have just found the newspaper on sidetable 3, which is the target object. I need to take it and put it in the sofa. The next logical step is to take the newspaper and go to the sofa, then place it there. I should avoid revisiting locations I have already checked.",
+      "validAction": true,
+      "effectiveAction": true,
+      "reward": 0.0,
+      "won": null,
+      "stateEvidence": "next-observation",
+      "beforeSnapshot": 5,
+      "afterSnapshot": 6
+    },
+    {
+      "turn": 6,
+      "rawAction": "go to sofa 1",
+      "action": {
+        "type": "go",
+        "target": "sofa 1"
+      },
+      "observationBefore": "You pick up the newspaper 1 from the sidetable 3.",
+      "observationAfter": "You arrive at sofa 1. On the sofa 1, you see a creditcard 2, a keychain 1, a laptop 2, a laptop 1, a pillow 1, and a remotecontrol 1.",
+      "modelOutput": "I have just picked up the newspaper from sidetable 3, but I still need to go to sofa 1 and place it there. The most efficient course of action is to go to sofa 1 first, then place the newspaper on it. The other furniture I have visited (dresser, cabinet, sidetables) is irrelevant to this task.",
+      "validAction": true,
+      "effectiveAction": true,
+      "reward": 0.0,
+      "won": null,
+      "stateEvidence": "next-observation",
+      "beforeSnapshot": 6,
+      "afterSnapshot": 7
+    },
+    {
+      "turn": 7,
+      "rawAction": "move newspaper 1 to sofa 1",
+      "action": {
+        "type": "put",
+        "object": "newspaper 1",
+        "target": "sofa 1"
+      },
+      "observationBefore": "You arrive at sofa 1. On the sofa 1, you see a creditcard 2, a keychain 1, a laptop 2, a laptop 1, a pillow 1, and a remotecontrol 1.",
+      "observationAfter": null,
+      "modelOutput": "I have just picked up the newspaper from sidetable 3 and am at sofa 1. The next logical step is to place the newspaper on the sofa. The action 'move newspaper 1 to sofa 1' will place the newspaper on the sofa, completing the task.",
+      "validAction": true,
+      "effectiveAction": true,
+      "reward": 10.0,
+      "won": null,
+      "stateEvidence": "valid-action-reconstruction",
+      "beforeSnapshot": 7,
+      "afterSnapshot": 8
+    }
+  ],
+  "snapshots": [
+    {
+      "location": "start",
+      "inventory": [],
+      "objects": {},
+      "seenContainers": [],
+      "containerStates": {},
+      "objectStates": {}
+    },
+    {
+      "location": "dresser 1",
+      "inventory": [],
+      "objects": {
+        "book 2": "dresser 1",
+        "cellphone 2": "dresser 1",
+        "remotecontrol 3": "dresser 1",
+        "statue 1": "dresser 1",
+        "television 1": "dresser 1"
+      },
+      "seenContainers": [
+        "dresser 1"
+      ],
+      "containerStates": {},
+      "objectStates": {}
+    },
+    {
+      "location": "sidetable 1",
+      "inventory": [],
+      "objects": {
+        "book 2": "dresser 1",
+        "cellphone 2": "dresser 1",
+        "remotecontrol 3": "dresser 1",
+        "statue 1": "dresser 1",
+        "television 1": "dresser 1",
+        "creditcard 1": "sidetable 1",
+        "desklamp 1": "sidetable 1"
+      },
+      "seenContainers": [
+        "dresser 1",
+        "sidetable 1"
+      ],
+      "containerStates": {},
+      "objectStates": {}
+    },
+    {
+      "location": "cabinet 1",
+      "inventory": [],
+      "objects": {
+        "book 2": "dresser 1",
+        "cellphone 2": "dresser 1",
+        "remotecontrol 3": "dresser 1",
+        "statue 1": "dresser 1",
+        "television 1": "dresser 1",
+        "creditcard 1": "sidetable 1",
+        "desklamp 1": "sidetable 1"
+      },
+      "seenContainers": [
+        "dresser 1",
+        "sidetable 1",
+        "cabinet 1"
+      ],
+      "containerStates": {},
+      "objectStates": {}
+    },
+    {
+      "location": "sidetable 2",
+      "inventory": [],
+      "objects": {
+        "book 2": "dresser 1",
+        "cellphone 2": "dresser 1",
+        "remotecontrol 3": "dresser 1",
+        "statue 1": "dresser 1",
+        "television 1": "dresser 1",
+        "creditcard 1": "sidetable 1",
+        "desklamp 1": "sidetable 1",
+        "book 1": "sidetable 2"
+      },
+      "seenContainers": [
+        "dresser 1",
+        "sidetable 1",
+        "cabinet 1",
+        "sidetable 2"
+      ],
+      "containerStates": {},
+      "objectStates": {}
+    },
+    {
+      "location": "sidetable 3",
+      "inventory": [],
+      "objects": {
+        "book 2": "dresser 1",
+        "cellphone 2": "dresser 1",
+        "remotecontrol 3": "dresser 1",
+        "statue 1": "dresser 1",
+        "television 1": "dresser 1",
+        "creditcard 1": "sidetable 1",
+        "desklamp 1": "sidetable 1",
+        "book 1": "sidetable 2",
+        "newspaper 1": "sidetable 3"
+      },
+      "seenContainers": [
+        "dresser 1",
+        "sidetable 1",
+        "cabinet 1",
+        "sidetable 2",
+        "sidetable 3"
+      ],
+      "containerStates": {},
+      "objectStates": {}
+    },
+    {
+      "location": "sidetable 3",
+      "inventory": [
+        "newspaper 1"
+      ],
+      "objects": {
+        "book 2": "dresser 1",
+        "cellphone 2": "dresser 1",
+        "remotecontrol 3": "dresser 1",
+        "statue 1": "dresser 1",
+        "television 1": "dresser 1",
+        "creditcard 1": "sidetable 1",
+        "desklamp 1": "sidetable 1",
+        "book 1": "sidetable 2",
+        "newspaper 1": "inventory"
+      },
+      "seenContainers": [
+        "dresser 1",
+        "sidetable 1",
+        "cabinet 1",
+        "sidetable 2",
+        "sidetable 3"
+      ],
+      "containerStates": {},
+      "objectStates": {}
+    },
+    {
+      "location": "sofa 1",
+      "inventory": [
+        "newspaper 1"
+      ],
+      "objects": {
+        "book 2": "dresser 1",
+        "cellphone 2": "dresser 1",
+        "remotecontrol 3": "dresser 1",
+        "statue 1": "dresser 1",
+        "television 1": "dresser 1",
+        "creditcard 1": "sidetable 1",
+        "desklamp 1": "sidetable 1",
+        "book 1": "sidetable 2",
+        "newspaper 1": "inventory",
+        "creditcard 2": "sofa 1",
+        "keychain 1": "sofa 1",
+        "laptop 2": "sofa 1",
+        "laptop 1": "sofa 1",
+        "pillow 1": "sofa 1",
+        "remotecontrol 1": "sofa 1"
+      },
+      "seenContainers": [
+        "dresser 1",
+        "sidetable 1",
+        "cabinet 1",
+        "sidetable 2",
+        "sidetable 3",
+        "sofa 1"
+      ],
+      "containerStates": {},
+      "objectStates": {}
+    },
+    {
+      "location": "sofa 1",
+      "inventory": [],
+      "objects": {
+        "book 2": "dresser 1",
+        "cellphone 2": "dresser 1",
+        "remotecontrol 3": "dresser 1",
+        "statue 1": "dresser 1",
+        "television 1": "dresser 1",
+        "creditcard 1": "sidetable 1",
+        "desklamp 1": "sidetable 1",
+        "book 1": "sidetable 2",
+        "newspaper 1": "sofa 1",
+        "creditcard 2": "sofa 1",
+        "keychain 1": "sofa 1",
+        "laptop 2": "sofa 1",
+        "laptop 1": "sofa 1",
+        "pillow 1": "sofa 1",
+        "remotecontrol 1": "sofa 1"
+      },
+      "seenContainers": [
+        "dresser 1",
+        "sidetable 1",
+        "cabinet 1",
+        "sidetable 2",
+        "sidetable 3",
+        "sofa 1"
+      ],
+      "containerStates": {},
+      "objectStates": {}
+    }
+  ],
+  "sceneId": "newspaper-living-room",
+  "reconstruction": true
+}

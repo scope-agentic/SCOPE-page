@@ -1,0 +1,105 @@
+{
+  "three": {
+    "tag": "r180",
+    "version": "0.180.0",
+    "license": "MIT"
+  },
+  "models": {
+    "sofa_02": {
+      "source": "https://polyhaven.com/a/sofa_02",
+      "resolution": "1k",
+      "license": "CC0-1.0",
+      "files": [
+        {
+          "path": "scene.gltf",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/sofa_02/sofa_02_1k.gltf",
+          "md5": "ec2590dc8433a523d0fe9e507766c16f"
+        },
+        {
+          "path": "textures/sofa_02_diff_1k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/sofa_02/sofa_02_diff_1k.jpg",
+          "md5": "0452c7d8dd3ef414d5ed3055085028a1"
+        },
+        {
+          "path": "textures/sofa_02_arm_1k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/sofa_02/sofa_02_arm_1k.jpg",
+          "md5": "78799d978a1117ba83dbffed9af0fa33"
+        },
+        {
+          "path": "textures/sofa_02_nor_gl_1k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/sofa_02/sofa_02_nor_gl_1k.jpg",
+          "md5": "968528a369bced172d34275dba5aebf1"
+        },
+        {
+          "path": "sofa_02.bin",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/sofa_02/sofa_02.bin",
+          "md5": "024d6f57a7c2ee7915430cd6e1c2651e"
+        }
+      ]
+    },
+    "wooden_table_02": {
+      "source": "https://polyhaven.com/a/wooden_table_02",
+      "resolution": "1k",
+      "license": "CC0-1.0",
+      "files": [
+        {
+          "path": "scene.gltf",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/wooden_table_02/wooden_table_02_1k.gltf",
+          "md5": "957c5d94784eed976cb4c6f0256a85e7"
+        },
+        {
+          "path": "textures/wooden_table_02_diff_1k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_table_02/wooden_table_02_diff_1k.jpg",
+          "md5": "07075a87918208594260c86c727e4396"
+        },
+        {
+          "path": "textures/wooden_table_02_nor_gl_1k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_table_02/wooden_table_02_nor_gl_1k.jpg",
+          "md5": "63ac7819b624149e77ae9459472ded6d"
+        },
+        {
+          "path": "wooden_table_02.bin",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/wooden_table_02/wooden_table_02.bin",
+          "md5": "a17c24e5366a0f7ad5522b88a4a9ea85"
+        },
+        {
+          "path": "textures/wooden_table_02_arm_1k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_table_02/wooden_table_02_arm_1k.jpg",
+          "md5": "8ee06c71a226e7f53b2ba53da79a55be"
+        }
+      ]
+    },
+    "drawer_cabinet": {
+      "source": "https://polyhaven.com/a/drawer_cabinet",
+      "resolution": "1k",
+      "license": "CC0-1.0",
+      "files": [
+        {
+          "path": "scene.gltf",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/drawer_cabinet/drawer_cabinet_1k.gltf",
+          "md5": "4ee75e02d0a2c383c61950c614d78cf8"
+        },
+        {
+          "path": "textures/drawer_cabinet_arm_1k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/drawer_cabinet/drawer_cabinet_arm_1k.jpg",
+          "md5": "ce7a177bd99d4aa87a95f84dab5eb7a6"
+        },
+        {
+          "path": "textures/drawer_cabinet_nor_gl_1k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/drawer_cabinet/drawer_cabinet_nor_gl_1k.jpg",
+          "md5": "151891cdd9db147046f951525f849f7f"
+        },
+        {
+          "path": "textures/drawer_cabinet_diff_1k.jpg",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/drawer_cabinet/drawer_cabinet_diff_1k.jpg",
+          "md5": "bb0311ae77d1779bc5b37396a029f6f3"
+        },
+        {
+          "path": "drawer_cabinet.bin",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/drawer_cabinet/drawer_cabinet.bin",
+          "md5": "1f0d93118e12628d0b79c7dd8d11b80e"
+        }
+      ]
+    }
+  }
+}

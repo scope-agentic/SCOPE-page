@@ -1,0 +1,121 @@
+/* The replay is intentionally isolated from the paper's tables and figure viewer. */
+#replay { padding-bottom: 20px; }
+#replay .alf-shell { background: #fff; border: 1px solid #ded8e4; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 42px #34253b08; }
+#replay .alf-taskbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 24px; border-bottom: 1px solid var(--line); background: #f4f1f6; }
+#replay .alf-taskbar > div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 12px; }
+#replay .alf-task-label { color: var(--purple); text-transform: uppercase; font-size: 13px; font-weight: 650; letter-spacing: 1px; }
+#replay .alf-taskbar strong { font-size: 15px; font-weight: 550; }
+#replay .alf-goal-original { display: none; }
+#replay .alf-episode-id { font: 13px ui-monospace, monospace; color: var(--muted); white-space: nowrap; }
+#replay .alf-episode-id > span { padding-inline: 5px; color: #b6a9c0; }
+#replay .alf-grid { display: grid; grid-template-columns: minmax(0,7fr) minmax(285px,3fr); height: 610px; }
+#replay .alf-stage { position: relative; min-width: 0; overflow: hidden; background: #c4b7a0; isolation: isolate; }
+#replay .alf-poster { position: absolute; inset: 0; background: url('../assets/replay/cover.png') center / cover; }
+#replay .alf-canvas-host, #replay .alf-canvas { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+#replay .alf-canvas { cursor: grab; touch-action: none; }
+#replay .alf-canvas.alf-dragging { cursor: grabbing; }
+#replay[data-playing="true"] .alf-canvas { cursor: default; touch-action: pan-y; }
+#replay .alf-stage-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; position: absolute; inset: 16px 16px auto; pointer-events: none; z-index: 2; }
+#replay .alf-reconstruction { color: #fffaf0; background: #25292292; border: 1px solid #f5f0df30; font-size: 13px; line-height: 1.5; padding: 6px 9px; border-radius: 4px; backdrop-filter: blur(8px); }
+#replay .alf-fullscreen { pointer-events: auto; font-size: 13px; min-height: 32px; border: 1px solid #fff6; border-radius: 4px; background: #27292170; color: #fffaf0; padding: 5px 10px; }
+#replay .alf-stage-bottom { position: absolute; inset: auto 0 0; color: #fff8e9; padding: 45px 22px 18px; background: linear-gradient(transparent,#1e2319bd); z-index: 1; pointer-events: none; }
+#replay .alf-view-state { color: #e0e3ce; font-size: 13px; letter-spacing: .6px; text-transform: uppercase; margin-bottom: 5px; }
+#replay .alf-current-action { font: 500 14px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; display: block; overflow-wrap: anywhere; }
+#replay .alf-view-footer { display: flex; justify-content: space-between; gap: 14px; margin-top: 11px; font-size: 13px; color: #e5e2d1; }
+#replay .alf-held { white-space: nowrap; }
+#replay .alf-look-hint { text-align: right; }
+#replay .alf-reticle { position: absolute; left: 50%; top: 50%; width: 4px; height: 4px; background: #fff8; border: 1px solid #fff9; border-radius: 50%; pointer-events: none; }
+#replay .alf-load-overlay { position: absolute; inset: 0; z-index: 3; background: linear-gradient(#141d1b40,#171b196e); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 17px; text-align: center; padding: 50px 25px; color: #fffaf0; backdrop-filter: blur(1.5px); }
+#replay[data-render-state="ready"] .alf-load-overlay { display: none; }
+#replay .alf-viewer-wordmark { font-size: 34px; font-weight: 650; letter-spacing: -1.5px; }
+#replay .alf-viewer-wordmark span { font-weight: 350; color: #eeeadc; }
+#replay .alf-load-button { background: #fffdf6; color: #383329; border: 1px solid #fff9; border-radius: 5px; min-height: 44px; padding: 11px 21px; font-size: 13px; font-weight: 550; }
+#replay .alf-load-button:hover { background: #eee4d2; }
+#replay .alf-load-status { font-size: 13px; max-width: 320px; line-height: 1.8; }
+#replay .alf-load-progress { width: 160px; height: 5px; accent-color: #eee1c6; }
+#replay .alf-trajectory { display: flex; flex-direction: column; min-width: 0; min-height: 0; border-left: 1px solid var(--line); background: #fcfbfd; }
+#replay .alf-trajectory-head { padding: 18px 18px 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+#replay .alf-trajectory-head h3 { font-size: 13px; font-weight: 600; }
+#replay .alf-step-counter { font: 13px ui-monospace, monospace; color: var(--purple); }
+#replay .alf-initial-step { border: 0; background: transparent; color: var(--muted); font: 13px/1.4 var(--sans); padding: 9px 18px; text-align: left; min-height: 35px; flex-shrink: 0; }
+#replay .alf-initial-step[aria-pressed="true"] { color: var(--purple); background: #eee8f3; }
+#replay .alf-actions { list-style: none; margin: 0; padding: 6px 8px; min-height: 120px; flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #cbbbd7 transparent; }
+#replay .alf-actions li { margin: 2px 0; padding: 0; }
+#replay .alf-action { width: 100%; min-height: 40px; display: grid; align-items: center; grid-template-columns: 20px minmax(0,1fr); gap: 7px; background: transparent; border: 1px solid transparent; border-radius: 5px; text-align: left; padding: 8px; color: #756d7c; line-height: 1.5; }
+#replay .alf-action:hover { background: #f0ecf4; }
+#replay .alf-action[aria-pressed="true"] { background: #eee6f4; border-color: #d6c5e3; color: var(--purple-dark); }
+#replay .alf-action-number { font: 13px ui-monospace, monospace; color: #a196a8; }
+#replay .alf-action.alf-completed .alf-action-number { color: var(--green); }
+#replay .alf-action code, #replay .alf-actions > li > code { font: 13px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+#replay .alf-step-detail { border-top: 1px solid var(--line); padding: 13px 18px; flex-shrink: 0; background: #fff; max-height: 260px; overflow-y: auto; scrollbar-width: thin; }
+#replay .alf-caption-current { font: 13px ui-monospace, monospace; color: #93859e; margin-bottom: 7px; }
+#replay .alf-step-detail summary { cursor: pointer; font-size: 13px; color: var(--muted); padding-block: 4px; }
+#replay .alf-step-detail h4 { font-size: 13px; font-weight: 600; margin: 12px 0 5px; color: var(--purple); }
+#replay .alf-step-detail pre { white-space: pre-wrap; overflow-wrap: anywhere; font: 13px/1.75 var(--sans); color: var(--muted); background: #f5f3f7; border-radius: 4px; padding: 8px; max-height: 130px; overflow-y: auto; }
+#replay .alf-after-text { font-size: 13px; line-height: 1.8; color: #655d6d; }
+#replay .alf-model-output { margin-top: 8px; }
+#replay .alf-evidence-tag { display: inline-block; font-size: 13px; color: #867047; background: #f6f0df; padding: 2px 6px; border-radius: 3px; margin-top: 8px; }
+#replay [hidden] { display: none !important; }
+#replay .alf-controls { border-top: 1px solid var(--line); padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+#replay .alf-transport { display: flex; gap: 5px; }
+#replay .alf-controls button { border: 1px solid #dcd4e4; background: #fff; border-radius: 5px; color: var(--purple); min-height: 38px; padding: 6px 11px; font-size: 13px; }
+#replay .alf-controls .alf-play { background: var(--purple); border-color: var(--purple); color: white; min-width: 76px; }
+#replay .alf-controls button:disabled { opacity: .4; cursor: default; }
+#replay .alf-range-label { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 160px; }
+#replay .alf-range-label > span, #replay .alf-speed-label > span { font-size: 13px; color: var(--muted); white-space: nowrap; }
+#replay .alf-step-range { width: 100%; min-width: 50px; accent-color: var(--purple); cursor: pointer; }
+#replay .alf-speed-label { display: flex; align-items: center; gap: 8px; }
+#replay .alf-speed { font: 13px var(--sans); color: var(--purple); min-height: 38px; border: 1px solid #dfd7e5; border-radius: 4px; padding: 5px 7px; background: #fff; }
+#replay .alf-log-result { font-size: 13px; color: #8a7656; padding: 0 20px 14px; }
+#replay .alf-evidence { font-size: 13px; color: var(--muted); max-width: 800px; margin: 15px auto 0; line-height: 1.8; }
+#replay .alf-expand { display: none; }
+#replay .alf-shell:fullscreen { width: 100%; height: 100%; background: #fff; display: flex; flex-direction: column; border-radius: 0; }
+#replay .alf-shell:fullscreen .alf-grid { flex: 1; min-height: 0; height: auto; }
+#replay .alf-shell:fullscreen .alf-controls { flex-shrink: 0; }
+@media(max-width:1000px) {
+  #replay .alf-grid { grid-template-columns: minmax(0,1fr) 285px; height: 590px; }
+  #replay .alf-taskbar { padding: 17px; }
+  #replay .alf-episode-id { display: none; }
+}
+@media(max-width:700px) {
+  #replay .alf-grid { display: block; height: auto; }
+  #replay .alf-stage { height: 330px; }
+  #replay .alf-taskbar { padding: 16px; }
+  #replay .alf-taskbar strong { font-size: 13px; }
+  #replay .alf-task-label { font-size: 13px; }
+  #replay .alf-trajectory { border-left: 0; border-top: 1px solid var(--line); }
+  #replay .alf-trajectory-head { padding: 14px 16px 6px; }
+  #replay .alf-initial-step { padding-inline: 16px; }
+  #replay .alf-actions { display: none; max-height: 260px; }
+  #replay .alf-list-expanded .alf-actions { display: block; }
+  #replay .alf-expand { display: block; border: 0; background: transparent; text-align: left; padding: 7px 16px 12px; color: var(--purple); font-size: 13px; min-height: 40px; }
+  #replay .alf-action { min-height: 44px; }
+  #replay .alf-step-detail { padding: 12px 16px; max-height: 260px; }
+  #replay .alf-stage-top { inset: 10px 10px auto; }
+  #replay .alf-reconstruction { font-size: 13px; max-width: 200px; }
+  #replay .alf-fullscreen { font-size: 13px; min-height: 36px; }
+  #replay .alf-stage-bottom { padding: 35px 15px 14px; }
+  #replay .alf-current-action { font-size: 13px; }
+  #replay .alf-view-footer { font-size: 13px; }
+  #replay .alf-look-hint { max-width: 160px; }
+  #replay .alf-controls { gap: 12px; padding: 13px 15px; }
+  #replay .alf-controls button { min-height: 44px; }
+  #replay .alf-controls .alf-play { min-width: 66px; }
+  #replay .alf-range-label { flex-basis: 100%; order: 3; }
+  #replay .alf-speed-label { margin-left: auto; }
+  #replay .alf-speed { font-size: 16px; }
+  #replay .alf-evidence { font-size: 13px; }
+  #replay .alf-shell:fullscreen { overflow-y: auto; }
+  #replay .alf-shell:fullscreen .alf-grid { flex: none; }
+  #replay .alf-shell:fullscreen .alf-stage { height: 55vh; }
+}
+@media print { #replay .alf-controls, #replay .alf-load-overlay, #replay .alf-fullscreen, #replay .alf-model-output {display:none} }
+/* Curated gallery controls; outcome replaces training/split metadata. */
+#replay .alf-taskbar {align-items:flex-start}
+#replay .alf-taskbar>div {flex:1;min-width:0}
+#replay .alf-episode-label {display:grid;gap:5px;width:290px;flex-shrink:0;font-size:13px;color:#8b7d94}
+#replay .alf-episode {width:100%;min-width:0;min-height:37px;border:1px solid #dcd2e4;border-radius:6px;background:white;padding:8px 10px;color:#584267;font:13px var(--sans)}
+#replay .alf-outcome,.ws-meta {display:inline-flex;width:fit-content;align-items:center;gap:5px;padding:3px 8px;border-radius:4px;font:13px/1.5 var(--sans);font-weight:550;letter-spacing:0}
+#replay [data-outcome=success].alf-outcome,.ws-meta[data-outcome=success] {color:#386f55;background:#e8f1eb}
+#replay [data-outcome=failure].alf-outcome,.ws-meta[data-outcome=failure] {color:#9a6254;background:#f6eae6}
+@media(max-width:700px){#replay .alf-taskbar{display:grid;gap:13px}#replay .alf-episode-label{width:100%}#replay .alf-episode{font-size:13px}}

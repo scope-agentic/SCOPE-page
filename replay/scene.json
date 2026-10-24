@@ -1,0 +1,508 @@
+{
+  "id": "newspaper-living-room",
+  "room": {
+    "width": 10,
+    "depth": 9,
+    "height": 3.1
+  },
+  "models": {
+    "sofa": "../assets/replay/models/sofa_02/scene.gltf",
+    "table": "../assets/replay/models/wooden_table_02/scene.gltf",
+    "storage": "../assets/replay/models/drawer_cabinet/scene.gltf"
+  },
+  "furniture": [
+    {
+      "id": "dresser 1",
+      "kind": "storage",
+      "position": [
+        0,
+        0,
+        -3.85
+      ],
+      "size": [
+        2,
+        1.05,
+        0.7
+      ],
+      "rotation": 0
+    },
+    {
+      "id": "cabinet 1",
+      "kind": "storage",
+      "position": [
+        3.1,
+        0,
+        -3.85
+      ],
+      "size": [
+        1.35,
+        1.9,
+        0.65
+      ],
+      "rotation": 0
+    },
+    {
+      "id": "sidetable 1",
+      "kind": "table",
+      "position": [
+        -4.15,
+        0,
+        -1.2
+      ],
+      "size": [
+        1.05,
+        0.72,
+        0.75
+      ],
+      "rotation": 0
+    },
+    {
+      "id": "sidetable 2",
+      "kind": "table",
+      "position": [
+        -4.15,
+        0,
+        1.1
+      ],
+      "size": [
+        1.05,
+        0.72,
+        0.75
+      ],
+      "rotation": 0
+    },
+    {
+      "id": "sidetable 3",
+      "kind": "table",
+      "position": [
+        4.05,
+        0,
+        0.5
+      ],
+      "size": [
+        1.05,
+        0.72,
+        0.75
+      ],
+      "rotation": 0
+    },
+    {
+      "id": "sidetable 4",
+      "kind": "table",
+      "position": [
+        4.1,
+        0,
+        -1.8
+      ],
+      "size": [
+        1.05,
+        0.72,
+        0.75
+      ],
+      "rotation": 0
+    },
+    {
+      "id": "sidetable 5",
+      "kind": "table",
+      "position": [
+        -4.15,
+        0,
+        -3.1
+      ],
+      "size": [
+        1.05,
+        0.72,
+        0.75
+      ],
+      "rotation": 0
+    },
+    {
+      "id": "sofa 1",
+      "kind": "sofa",
+      "position": [
+        1,
+        0,
+        3.65
+      ],
+      "size": [
+        2.7,
+        1.1,
+        1.1
+      ],
+      "rotation": 3.141592654
+    },
+    {
+      "id": "armchair 1",
+      "kind": "sofa",
+      "position": [
+        -2.85,
+        0,
+        3.5
+      ],
+      "size": [
+        1.15,
+        1.05,
+        1.05
+      ],
+      "rotation": 2.8
+    },
+    {
+      "id": "garbagecan 1",
+      "kind": "bin",
+      "position": [
+        4.35,
+        0,
+        -3.5
+      ],
+      "size": [
+        0.4,
+        0.65,
+        0.4
+      ],
+      "rotation": 0
+    }
+  ],
+  "drawerBanks": [
+    {
+      "position": [
+        -3.25,
+        0,
+        -4.05
+      ],
+      "first": 1,
+      "count": 7
+    },
+    {
+      "position": [
+        -1.95,
+        0,
+        -4.05
+      ],
+      "first": 8,
+      "count": 7
+    },
+    {
+      "position": [
+        1.75,
+        0,
+        -4.05
+      ],
+      "first": 15,
+      "count": 7
+    }
+  ],
+  "anchors": {
+    "start": {
+      "position": [
+        0,
+        1.6,
+        1.8
+      ],
+      "lookAt": [
+        0,
+        1,
+        -3.85
+      ]
+    },
+    "dresser 1": {
+      "position": [
+        0,
+        1.6,
+        -2.25
+      ],
+      "lookAt": [
+        0,
+        0.97,
+        -3.85
+      ]
+    },
+    "sidetable 1": {
+      "position": [
+        -2.7,
+        1.6,
+        -1.2
+      ],
+      "lookAt": [
+        -4.15,
+        0.75,
+        -1.2
+      ]
+    },
+    "cabinet 1": {
+      "position": [
+        2.7,
+        1.6,
+        -2.15
+      ],
+      "lookAt": [
+        3.1,
+        1,
+        -3.85
+      ]
+    },
+    "sidetable 2": {
+      "position": [
+        -2.7,
+        1.6,
+        1.1
+      ],
+      "lookAt": [
+        -4.15,
+        0.75,
+        1.1
+      ]
+    },
+    "sidetable 3": {
+      "position": [
+        2.65,
+        1.6,
+        0.5
+      ],
+      "lookAt": [
+        4.05,
+        0.75,
+        0.5
+      ]
+    },
+    "sofa 1": {
+      "position": [
+        1,
+        1.6,
+        1.65
+      ],
+      "lookAt": [
+        1,
+        0.55,
+        3.45
+      ]
+    }
+  },
+  "paths": {
+    "start|dresser 1": [
+      [
+        0,
+        1.6,
+        0
+      ],
+      [
+        0,
+        1.6,
+        -1.3
+      ]
+    ],
+    "dresser 1|sidetable 1": [
+      [
+        -0.8,
+        1.6,
+        -1.9
+      ],
+      [
+        -1.8,
+        1.6,
+        -1.2
+      ]
+    ],
+    "sidetable 1|cabinet 1": [
+      [
+        -1.4,
+        1.6,
+        -1.3
+      ],
+      [
+        0.9,
+        1.6,
+        -1.5
+      ]
+    ],
+    "cabinet 1|sidetable 2": [
+      [
+        1.7,
+        1.6,
+        -0.7
+      ],
+      [
+        -0.8,
+        1.6,
+        0.6
+      ]
+    ],
+    "sidetable 2|sidetable 3": [
+      [
+        -1.1,
+        1.6,
+        1.1
+      ],
+      [
+        1.1,
+        1.6,
+        0.6
+      ]
+    ],
+    "sidetable 3|sofa 1": [
+      [
+        1.6,
+        1.6,
+        0.6
+      ],
+      [
+        1,
+        1.6,
+        1.1
+      ]
+    ]
+  },
+  "objectSlots": {
+    "book 2": {
+      "parent": "dresser 1",
+      "position": [
+        -0.72,
+        1.085,
+        -3.7
+      ],
+      "kind": "book"
+    },
+    "cellphone 2": {
+      "parent": "dresser 1",
+      "position": [
+        -0.32,
+        1.075,
+        -3.62
+      ],
+      "kind": "phone"
+    },
+    "remotecontrol 3": {
+      "parent": "dresser 1",
+      "position": [
+        0.36,
+        1.075,
+        -3.59
+      ],
+      "kind": "remote"
+    },
+    "statue 1": {
+      "parent": "dresser 1",
+      "position": [
+        0.75,
+        1.05,
+        -3.75
+      ],
+      "kind": "statue"
+    },
+    "television 1": {
+      "parent": "dresser 1",
+      "position": [
+        0.02,
+        1.05,
+        -3.95
+      ],
+      "kind": "tv"
+    },
+    "creditcard 1": {
+      "parent": "sidetable 1",
+      "position": [
+        -4.16,
+        0.732,
+        -1.06
+      ],
+      "kind": "card"
+    },
+    "desklamp 1": {
+      "parent": "sidetable 1",
+      "position": [
+        -4.24,
+        0.72,
+        -1.38
+      ],
+      "kind": "lamp"
+    },
+    "book 1": {
+      "parent": "sidetable 2",
+      "position": [
+        -4.13,
+        0.76,
+        1.08
+      ],
+      "kind": "book"
+    },
+    "newspaper 1": {
+      "parent": "sidetable 3",
+      "position": [
+        4.03,
+        0.735,
+        0.49
+      ],
+      "kind": "newspaper"
+    },
+    "creditcard 2": {
+      "parent": "sofa 1",
+      "position": [
+        0.2,
+        0.65,
+        3.4
+      ],
+      "kind": "card"
+    },
+    "keychain 1": {
+      "parent": "sofa 1",
+      "position": [
+        0.55,
+        0.66,
+        3.45
+      ],
+      "kind": "keys"
+    },
+    "laptop 2": {
+      "parent": "sofa 1",
+      "position": [
+        1.85,
+        0.66,
+        3.53
+      ],
+      "kind": "laptop"
+    },
+    "laptop 1": {
+      "parent": "sofa 1",
+      "position": [
+        1.37,
+        0.66,
+        3.56
+      ],
+      "kind": "laptop"
+    },
+    "pillow 1": {
+      "parent": "sofa 1",
+      "position": [
+        -0.02,
+        0.75,
+        3.8
+      ],
+      "kind": "pillow"
+    },
+    "remotecontrol 1": {
+      "parent": "sofa 1",
+      "position": [
+        0.63,
+        0.66,
+        3.68
+      ],
+      "kind": "remote"
+    }
+  },
+  "placementSlots": {
+    "newspaper 1|sofa 1": [
+      0.82,
+      0.65,
+      3.3
+    ]
+  },
+  "surfaceHeights": {
+    "dresser 1": 1.05,
+    "cabinet 1": 1.9,
+    "sidetable 1": 0.72,
+    "sidetable 2": 0.72,
+    "sidetable 3": 0.72,
+    "sidetable 4": 0.72,
+    "sidetable 5": 0.72,
+    "sofa 1": 0.64
+  }
+}
