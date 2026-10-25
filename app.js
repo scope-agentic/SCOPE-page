@@ -126,33 +126,17 @@
         }
       });
     } else authors.textContent = t('authors');
-    // Anonymous previews do not expose unannounced public resources.
     $$('[data-public-resource]').forEach((link) => link.remove());
-    if (!config.anonymous) {
-      [['code', config.codeUrl], ['arxiv', config.arxivUrl]].forEach(([key, value]) => {
-        const url = safeWebUrl(value);
-        if (!url) return;
-        const link = document.createElement('a');
-        link.href = url;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.className = 'button button-secondary';
-        link.dataset.publicResource = key;
-        link.textContent = `${t(key)} ↗`;
-        $('#resource-links').append(link);
-      });
-    }
-    $('#citation')?.remove();
-    if (!config.anonymous && config.bibtex) {
-      const details = document.createElement('details');
-      details.id = 'citation';
-      details.className = 'citation-block';
-      const summary = document.createElement('summary');
-      summary.textContent = t('citation');
-      const code = document.createElement('pre');
-      code.textContent = config.bibtex;
-      details.append(summary, code);
-      $('#analysis').after(details);
+    const codeUrl = safeWebUrl(config.codeUrl);
+    if (codeUrl) {
+      const link = document.createElement('a');
+      link.href = codeUrl;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.className = 'button button-secondary';
+      link.dataset.publicResource = 'code';
+      link.textContent = `${t('code')} ↗`;
+      $('#resource-links').append(link);
     }
     if (!config.anonymous) $('#publication-status').textContent = language === 'zh' ? '研究项目主页' : 'Research project';
   }

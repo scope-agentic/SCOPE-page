@@ -16,13 +16,13 @@ Open http://127.0.0.1:8000/. Use an HTTP server rather than opening index.html d
 
 ## Maintain
 
-- `config.js`: paper URL, author anonymity, and optional public resource links.
+- `config.js`: anonymous author state and the public code repository link.
 - `content.js` and `index.html`: bilingual copy and default English content.
 - `data.js`: complete main experimental results.
 - `method/`: interactive method walkthrough.
 - `replay/`: ALFWorld playback, scene configuration, and curated episode data.
 - `webshop/`: WebShop playback and curated episode data.
-- `assets/`: paper figures, local models, textures, illustrations, and vendored Three.js.
+- `assets/`: research figures, local models, textures, illustrations, and vendored Three.js.
 
 Keep the directory structure intact. All runtime assets use relative URLs, supporting the `/SCOPE-page/` project path. Raw source trajectory HTML, authoring scripts, and local caches are excluded from this publication checkout. Research figures come from the provided SCOPE materials. Manuscript files are kept outside the public website directory.
 
@@ -40,11 +40,11 @@ The `experience/` directory adds the visual layer and the three mechanism demos:
 
 - Ambient particles, a fading pointer trail, a reading-progress line, and a persistent effects toggle. Decorative motion respects reduced-motion settings; the trail runs only for precise pointers.
 - A visibility-aware Analyzer walkthrough with success, failure, and empty-selection examples. Each generated skill connects to its target steps and updates the auxiliary selection mask. These are explicitly illustrative examples, separate from recorded replays.
-- An analytical bounded signed OPSD explorer: alpha 1 / 2.5 / 5, bound 0.1 / 1 / 10, signed gap, and selection mask. Defaults follow the included paper: alpha 2.5 and bound 1. The coefficient uses stop-gradient; the displayed curve is not the derivative of tanh.
+- An analytical bounded signed OPSD explorer: alpha 1 / 2.5 / 5, bound 0.1 / 1 / 10, signed gap, and selection mask. The released defaults are alpha 2.5 and bound 1. The coefficient uses stop-gradient; the displayed curve is not the derivative of tanh.
 - A pairwise length explorer with default temperature 0.1, adjustable successful trajectory lengths, and common length rescaling. The fixed-horizon absolute bonus is explicitly an illustrative mathematical comparison. Ablation figures follow the supplied results, Table 2: Qwen2.5-3B at step 180 (93.0 / 97.7 / 98.4 percent).
 - Animated benchmark bars using `data.js`, synchronized with the existing three-backbone results table. Methods can be toggled; keyboard focus or a tap exposes each value.
 
-Copy is bilingual. All additions are dependency-free, use relative asset paths, and work on GitHub Pages without a build step. `config.js` remains the place to add verified author and resource information. The supplied mascot is used in the navigation, hero wordmark, and favicon.
+Copy is bilingual. All additions are dependency-free, use relative asset paths, and work on GitHub Pages without a build step. `config.js` stores the anonymous release settings and organization code link. The supplied mascot is used in the navigation, hero wordmark, and favicon.
 
 ### Motivation, reading and automatic playback
 
