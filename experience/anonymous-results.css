@@ -24,18 +24,20 @@
 .scale-table .scale-ours th,.scale-table .scale-ours td { color:#5e407d; font-weight:700; }
 .scale-table .scale-split-start>* { border-top:8px solid #fff; }
 .scale-note { margin:16px 2px 0; color:#71697c; font-size:14px; line-height:1.7; }
-.ablation-table-shell { margin-top:28px; padding:24px 26px 18px; border:1px solid #e4dce9; border-radius:20px; background:#fff; }
+.ablation-table-shell { margin-top:33px; padding:26px 28px 20px; border:1px solid #e4dce9; border-radius:22px; background:#fff; box-shadow:0 10px 30px #634b8110; }
 .ablation-table-scroll { max-width:100%; overflow-x:auto; }
-.ablation-table { width:100%; min-width:830px; border-collapse:collapse; font-size:15px; font-variant-numeric:tabular-nums; }
-.ablation-table caption { padding:0 0 16px; color:#3b334b; font-size:18px; font-weight:650; text-align:left; line-height:1.45; }
-.ablation-table thead th { padding:11px 12px; border-bottom:2px solid #c9b9d9; color:#534568; font-size:14px; text-align:right; }
+.ablation-table { width:100%; min-width:830px; border-collapse:separate; border-spacing:0; font-size:15px; font-variant-numeric:tabular-nums; }
+.ablation-table caption { caption-side:top; padding:0 0 18px; color:#3b334b; font-size:18px; font-weight:650; text-align:left; line-height:1.45; }
+.ablation-table thead th { padding:11px 13px; border-bottom:2px solid #c9b9d9; color:#534568; font-size:14px; font-weight:700; text-align:right; white-space:nowrap; }
 .ablation-table thead th:first-child { width:250px; text-align:left; }
-.ablation-table tbody th,.ablation-table tbody td { padding:10px 12px; border-bottom:1px solid #e9e3ed; line-height:1.45; }
+.ablation-table tbody th,.ablation-table tbody td { padding:11px 13px; border-bottom:1px solid #e9e3ed; line-height:1.45; }
 .ablation-table tbody th { color:#3c3548; font-weight:560; text-align:left; white-space:nowrap; }
 .ablation-table tbody td { color:#555063; text-align:right; }
-.ablation-table tbody td:last-child { background:#f7f2fb; color:#654b8b; font-weight:650; }
-.ablation-table .ablation-full th,.ablation-table .ablation-full td { background:#f0e9f8; color:#65458e; font-weight:750; }
-.ablation-table .ablation-group th { padding:11px 12px 8px; background:#f8f6fa; color:#89729c; font-size:14px; font-weight:680; }
+.ablation-table tbody td:last-child { background:#f7f2fb; font-weight:500; color:#654b8b; }
+.ablation-table tbody td.best { font-weight:760; color:#42366b; }
+.ablation-table .ablation-full th,.ablation-table .ablation-full td { background:#f0e9f8; }
+.ablation-table .ablation-full th { color:#65458e; font-weight:750; }
+.ablation-table .ablation-group th { padding:11px 13px 8px; background:#f8f6fa; color:#89729c; font-size:14px; font-weight:680; letter-spacing:.2px; }
 .ablation-table-shell>p { margin-top:15px; color:#776f80; font-size:14px; line-height:1.7; }
 .error-localization { display:grid; grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr); align-items:center; gap:38px; margin:0 0 48px; padding:31px; border:1px solid #e6ddea; border-radius:23px; background:linear-gradient(130deg,#fbf8fe,#fff); }
 .error-localization h3 { margin-top:8px; font-size:clamp(27px,3vw,36px); font-weight:620; letter-spacing:-.025em; line-height:1.24; }
