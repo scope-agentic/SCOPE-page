@@ -39,7 +39,7 @@ Furniture assets are CC0 from Poly Haven; source links are in `assets/replay/CRE
 The `experience/` directory adds the visual layer and the three mechanism demos:
 
 - Ambient particles, a fading pointer trail, a reading-progress line, and a persistent effects toggle. Decorative motion respects reduced-motion settings; the trail runs only for precise pointers.
-- A visibility-aware Analyzer walkthrough with success, failure, and empty-selection examples. Each generated skill connects to its target steps and updates the auxiliary selection mask. These are explicitly illustrative examples, separate from recorded replays.
+- A visibility-aware Analyzer walkthrough using three recorded training trajectories: a successful ALFWorld rollout with three returned skills, a failed WebShop rollout with two, and a successful WebShop rollout with none. Each returned skill connects to its recorded zero-based target steps and updates the auxiliary selection mask. The public data omits run and trajectory identifiers.
 - An analytical bounded signed OPSD explorer: alpha 1 / 2.5 / 5, bound 0.1 / 1 / 10, signed gap, and selection mask. The released defaults are alpha 2.5 and bound 1. The coefficient uses stop-gradient; the displayed curve is not the derivative of tanh.
 - A pairwise length explorer with default temperature 0.1, adjustable successful trajectory lengths, and common length rescaling. The fixed-horizon absolute bonus is an illustrative mathematical comparison. The component ablation table reports Qwen2.5-3B results at step 180.
 - Animated benchmark bars using `data.js`, synchronized with the existing three-backbone results table. Methods can be toggled; keyboard focus or a tap exposes each value.

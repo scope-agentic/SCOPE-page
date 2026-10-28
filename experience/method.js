@@ -1,4 +1,5 @@
 import { distillationSignal, pairwiseBonus } from '../method/math.js';
+import recordedAnalyzerExamples from './recorded-analyzer-examples.js';
 
 const root = document.querySelector('#method-lab');
 const $ = s => root.querySelector(s);
@@ -7,12 +8,12 @@ let language = document.documentElement.lang === 'zh-CN' ? 'zh' : 'en';
 const words = {
   en: {
     kicker:'THE SCOPE LEARNING LOOP', intro:'Explore the three ideas that turn hindsight into better decisions.', tabAnalyzer:'Step-level skills',tabAnalyzerSub:'Find precisely what to correct',tabDistill:'Bounded signed OPSD',tabDistillSub:'Keep direction. Control strength.',tabReward:'Pairwise efficiency',tabRewardSub:'Prefer shorter successes',
-    analyzerOverline:'SELF-BOOTSTRAPPED ERROR ANALYSIS',analyzerTitle:'A skill for the step that needs it.',analyzerBody:'The analyzer reads the trajectory, grounds each error in feedback, and writes a correction tied to its target steps.',play:'Play analysis',pause:'Pause analysis',replay:'Replay analysis',successCase:'Success with errors',failureCase:'Failed trajectory',cleanCase:'No supported error',trajectory:'ON-POLICY TRAJECTORY',task:'TASK',scanning:'Analyzing',selected:'Selected error',ordinaryRL:'Ordinary RL only',snapshot:'SAME POLICY SNAPSHOT',analyzerModel:'Analyzer · A<sub>θ̄</sub>',structured:'STRUCTURED STEP-LEVEL GUIDANCE',selectionMask:'Auxiliary selection mask mₜ',selectionNote:'Each skill conditions the teacher only at its assigned steps.',analysisProgress:'Analysis progress',
+    analyzerOverline:'SELF-BOOTSTRAPPED ERROR ANALYSIS',analyzerTitle:'A skill for the step that needs it.',analyzerBody:'The analyzer reads the trajectory, grounds each error in feedback, and writes a correction tied to its target steps.',play:'Play analysis',pause:'Pause analysis',replay:'Replay analysis',successCase:'Success with errors',failureCase:'Failed trajectory',cleanCase:'No skill returned',trajectory:'RECORDED ON-POLICY TRAJECTORY',task:'TASK',scanning:'Analyzing',selected:'Analyzer-selected step',ordinaryRL:'Ordinary RL only',snapshot:'SAME POLICY SNAPSHOT',analyzerModel:'Analyzer · A<sub>θ̄</sub>',structured:'STRUCTURED STEP-LEVEL GUIDANCE',selectionMask:'Auxiliary selection mask mₜ',selectionNote:'Each skill conditions the teacher only at its assigned steps.',analysisProgress:'Analysis progress',
     distillOverline:'SELECTIVE · BOUNDED · SIGNED',distillTitle:'A strong correction. A controlled update.',distillBody:'Positive gaps reinforce a sampled token. Negative gaps suppress it. Tanh keeps both directions and smoothly bounds their strength.',animateGap:'Animate the gap',pauseGap:'Pause the gap',teacher:'TEACHER',student:'STUDENT',teacherContext:'Ordinary history + assigned skill',studentContext:'Ordinary history',sameToken:'Same sampled token<br>Δ = log π<sub>T</sub> − log π<sub>S</sub>',coefficient:'Distillation coefficient',gapAxis:'Teacher–student log-probability gap Δ',scaledGap:'Scaled gap αΔ',hardClip:'Hard clip',parameters:'Explore the parameters',paperDefaults:'Our defaults ↺',slope:'Slope near zero',default:'default',slopeNote:'Higher α strengthens sensitivity to small gaps.',bound:'Saturation magnitude',boundNote:'c sets the bound in both update directions.',gap:'Sampled-token gap Δ',suppression:'Suppress',reinforcement:'Reinforce',unbounded:'Scaled gap αΔ',applied:'Applied mₜ Â',gradientNote:'The coefficient is stop-gradient. The selected-token loss is −Â log πS, averaged only over selected tokens. The tanh derivative is not backpropagated through the gap.',
     rewardOverline:'SUCCESS-RELATIVE PAIRWISE EFFICIENCY',rewardTitle:'Shorter is better. Among successes.',rewardBody:'Compare interaction counts within the same task group. A smooth preference adapts to relative length, without choosing an absolute target.',resetExample:'Reset example ↺',preference:'Pairwise preference pᵢⱼ',ratioAxis:'Interaction length ratio Tᵢ / Tⱼ',activeTemperature:'Selected temperature',hardRanking:'Hard ranking',referenceCurves:'Reference temperatures: τ = 0.03 / 0.1 / 0.3',temperature:'Preference temperature τₗₑₙ',sharper:'Sharper',smoother:'Smoother',tauDefault:'Our default · 0.1',scaleExperiment:'TRY A COMMON LENGTH RESCALING',scaleTitle:'Same proportions. Same pairwise bonus.',scaleBody:'Multiply every trajectory length while keeping a fixed horizon H = 30 for the absolute comparison.',successfulRollout:'Rollout',pairwiseBonus:'Pairwise bᵢ',absoluteBonus:'Absolute bonus',invariant:'log(aTⱼ) − log(aTᵢ) = log Tⱼ − log Tᵢ. A common rescaling leaves pairwise scores unchanged.',absoluteDefinition:'Absolute bonus: max(0, 1 − T/H), with H = 30.',rewardRule:'Failures: no efficiency bonus. A lone success: b = ½. Mean b among successes: ½.',ablation:'OUR ABLATION · ALFWORLD · QWEN2.5-3B · STEP 180',noLength:'No length reward',absolute:'Absolute length',loopTitle:'One policy. A self-improving loop.',loopBody:'Supervised warm-up → on-policy rollouts → analysis & skills → GRPO + selective OPSD → updated actor and analyzer.',
   },
   zh: {
-    kicker:'SCOPE 学习闭环',intro:'交互探索: 如何把后见经验转化为更好的决策.',tabAnalyzer:'步骤级技能',tabAnalyzerSub:'精确定位需要纠正的决策',tabDistill:'有界带符号 OPSD',tabDistillSub:'保留方向, 控制强度',tabReward:'成对效率奖励',tabRewardSub:'偏好更短的成功轨迹',analyzerOverline:'自主迭代的错误分析',analyzerTitle:'把对应技能, 交给真正需要的步骤.',analyzerBody:'Analyzer 读取轨迹, 根据环境反馈定位错误, 并为对应步骤生成纠错技能.',play:'播放分析',pause:'暂停分析',replay:'重新播放',successCase:'成功, 但包含错误',failureCase:'失败轨迹',cleanCase:'没有充分支持的错误',trajectory:'同策略交互轨迹',task:'任务',scanning:'正在分析',selected:'选中的错误步',ordinaryRL:'仅普通 RL',snapshot:'来自同一策略快照',analyzerModel:'Analyzer · A<sub>θ̄</sub>',structured:'结构化的步骤级指导',selectionMask:'辅助蒸馏掩码 mₜ',selectionNote:'每条 skill 仅在其对应步骤为教师提供条件.',analysisProgress:'分析进度',distillOverline:'选择性 · 有界 · 带符号',distillTitle:'纠正有方向, 更新有边界.',distillBody:'正差值增强采样 token, 负差值抑制采样 token. Tanh 同时保留两个方向, 平滑限制更新强度.',animateGap:'自动演示差值',pauseGap:'暂停差值演示',teacher:'教师',student:'学生',teacherContext:'普通历史 + 对应步骤的 skill',studentContext:'普通交互历史',sameToken:'对同一采样 token 评分<br>Δ = log π<sub>T</sub> − log π<sub>S</sub>',coefficient:'蒸馏系数',gapAxis:'教师与学生的对数概率差 Δ',scaledGap:'缩放差值 αΔ',hardClip:'硬截断',parameters:'探索参数的作用',paperDefaults:'恢复默认参数 ↺',slope:'零点附近的斜率',default:'默认',slopeNote:'α 越大, 对较小差值的响应越强.',bound:'饱和值的大小',boundNote:'c 同时约束增强与抑制两个方向.',gap:'采样 token 的差值 Δ',suppression:'抑制',reinforcement:'增强',unbounded:'缩放差值 αΔ',applied:'实际系数 mₜ Â',gradientNote:'系数使用 stop-gradient. 选中 token 的损失为 −Â log πS, 仅对选中的 token 取均值; 不通过差值反传 tanh 的导数.',rewardOverline:'成功轨迹之间的成对效率比较',rewardTitle:'先成功, 再比较谁更高效.',rewardBody:'在同一任务组内比较交互次数. 平滑偏好随相对长度调整, 无需预设绝对目标长度.',resetExample:'重置示例 ↺',preference:'成对偏好 pᵢⱼ',ratioAxis:'交互长度之比 Tᵢ / Tⱼ',activeTemperature:'当前温度',hardRanking:'硬排序',referenceCurves:'参考温度: τ = 0.03 / 0.1 / 0.3',temperature:'偏好温度 τₗₑₙ',sharper:'更陡峭',smoother:'更平滑',tauDefault:'默认温度 · 0.1',scaleExperiment:'试试整体放大交互长度',scaleTitle:'比例不变, 成对奖励不变.',scaleBody:'将所有轨迹长度乘以相同倍数; 绝对奖励仍使用固定预算 H = 30.',successfulRollout:'轨迹',pairwiseBonus:'成对奖励 bᵢ',absoluteBonus:'绝对奖励',invariant:'log(aTⱼ) − log(aTᵢ) = log Tⱼ − log Tᵢ. 共同放大长度, 成对得分不变.',absoluteDefinition:'绝对奖励: max(0, 1 − T/H), 其中 H = 30.',rewardRule:'失败: 无效率奖励. 唯一成功: b = ½. 所有成功轨迹的平均 b = ½.',ablation:'我们的消融实验 · ALFWORLD · QWEN2.5-3B · 第 180 步',noLength:'无长度奖励',absolute:'绝对长度奖励',loopTitle:'一个策略, 持续自我改进.',loopBody:'监督初始化 → 同策略交互 → 分析与技能 → GRPO + 选择性 OPSD → 更新 Actor 与 Analyzer.',
+    kicker:'SCOPE 学习闭环',intro:'交互探索: 如何把后见经验转化为更好的决策.',tabAnalyzer:'步骤级技能',tabAnalyzerSub:'精确定位需要纠正的决策',tabDistill:'有界带符号 OPSD',tabDistillSub:'保留方向, 控制强度',tabReward:'成对效率奖励',tabRewardSub:'偏好更短的成功轨迹',analyzerOverline:'自主迭代的错误分析',analyzerTitle:'把对应技能, 交给真正需要的步骤.',analyzerBody:'Analyzer 读取轨迹, 根据环境反馈定位错误, 并为对应步骤生成纠错技能.',play:'播放分析',pause:'暂停分析',replay:'重新播放',successCase:'成功, 但包含错误',failureCase:'失败轨迹',cleanCase:'未生成 skill',trajectory:'真实同策略交互轨迹',task:'任务',scanning:'正在分析',selected:'Analyzer 选中的步骤',ordinaryRL:'仅普通 RL',snapshot:'来自同一策略快照',analyzerModel:'Analyzer · A<sub>θ̄</sub>',structured:'结构化的步骤级指导',selectionMask:'辅助蒸馏掩码 mₜ',selectionNote:'每条 skill 仅在其对应步骤为教师提供条件.',analysisProgress:'分析进度',distillOverline:'选择性 · 有界 · 带符号',distillTitle:'纠正有方向, 更新有边界.',distillBody:'正差值增强采样 token, 负差值抑制采样 token. Tanh 同时保留两个方向, 平滑限制更新强度.',animateGap:'自动演示差值',pauseGap:'暂停差值演示',teacher:'教师',student:'学生',teacherContext:'普通历史 + 对应步骤的 skill',studentContext:'普通交互历史',sameToken:'对同一采样 token 评分<br>Δ = log π<sub>T</sub> − log π<sub>S</sub>',coefficient:'蒸馏系数',gapAxis:'教师与学生的对数概率差 Δ',scaledGap:'缩放差值 αΔ',hardClip:'硬截断',parameters:'探索参数的作用',paperDefaults:'恢复默认参数 ↺',slope:'零点附近的斜率',default:'默认',slopeNote:'α 越大, 对较小差值的响应越强.',bound:'饱和值的大小',boundNote:'c 同时约束增强与抑制两个方向.',gap:'采样 token 的差值 Δ',suppression:'抑制',reinforcement:'增强',unbounded:'缩放差值 αΔ',applied:'实际系数 mₜ Â',gradientNote:'系数使用 stop-gradient. 选中 token 的损失为 −Â log πS, 仅对选中的 token 取均值; 不通过差值反传 tanh 的导数.',rewardOverline:'成功轨迹之间的成对效率比较',rewardTitle:'先成功, 再比较谁更高效.',rewardBody:'在同一任务组内比较交互次数. 平滑偏好随相对长度调整, 无需预设绝对目标长度.',resetExample:'重置示例 ↺',preference:'成对偏好 pᵢⱼ',ratioAxis:'交互长度之比 Tᵢ / Tⱼ',activeTemperature:'当前温度',hardRanking:'硬排序',referenceCurves:'参考温度: τ = 0.03 / 0.1 / 0.3',temperature:'偏好温度 τₗₑₙ',sharper:'更陡峭',smoother:'更平滑',tauDefault:'默认温度 · 0.1',scaleExperiment:'试试整体放大交互长度',scaleTitle:'比例不变, 成对奖励不变.',scaleBody:'将所有轨迹长度乘以相同倍数; 绝对奖励仍使用固定预算 H = 30.',successfulRollout:'轨迹',pairwiseBonus:'成对奖励 bᵢ',absoluteBonus:'绝对奖励',invariant:'log(aTⱼ) − log(aTᵢ) = log Tⱼ − log Tᵢ. 共同放大长度, 成对得分不变.',absoluteDefinition:'绝对奖励: max(0, 1 − T/H), 其中 H = 30.',rewardRule:'失败: 无效率奖励. 唯一成功: b = ½. 所有成功轨迹的平均 b = ½.',ablation:'我们的消融实验 · ALFWORLD · QWEN2.5-3B · 第 180 步',noLength:'无长度奖励',absolute:'绝对长度奖励',loopTitle:'一个策略, 持续自我改进.',loopBody:'监督初始化 → 同策略交互 → 分析与技能 → GRPO + 选择性 OPSD → 更新 Actor 与 Analyzer.',
   }
 };
 const t = k => words[language][k] ?? words.en[k] ?? k;
@@ -34,7 +35,7 @@ function player(panel, duration, render, button, labels) {
   function tick(now) {
     frame = 0;
     if (!playing || !visible || document.hidden || panel.hidden) {previous=0; return;}
-    if (previous) position += Math.min(now-previous,80)/duration;
+    if (previous) position += Math.min(now-previous,80)/(typeof duration === 'function' ? duration() : duration);
     previous=now;
     if (position >= 1) {position=1; playing=false; previous=0; updateButton();}
     render(position);
@@ -55,36 +56,102 @@ function player(panel, duration, render, button, labels) {
   return {pause,play,refresh:updateButton,render:()=>render(position),seek(value) {pause();position=Math.max(0,Math.min(1,value));render(position);updateButton();},activate(){run();},get position(){return position;}};
 }
 
-// Educational trajectories. These are intentionally distinct from recorded replay data.
-const scenarios = {
- success:{goal:['Put a clean mug on the dining table.','把清洗后的杯子放到餐桌上.'],outcome:true,actions:['go to cabinet 1','take mug 1 from table 1','take mug 1 from cabinet 1','clean mug 1 with cabinet 1','go to sinkbasin 1','clean mug 1 with sinkbasin 1','go to diningtable 1','put mug 1 in/on diningtable 1'],feedback:[['A mug is inside the cabinet.','柜子中有一个杯子.'],['Nothing happens. The mug is not on the table.','无效动作: 杯子不在桌上.'],['You pick up the mug.','拿起了杯子.'],['Nothing happens. This is not a cleaning fixture.','无效动作: 柜子不是清洗设施.'],['You arrive at the sink.','来到水槽.'],['The mug is now clean.','杯子已清洗.'],['You arrive at the dining table.','来到餐桌.'],['Clean mug placed. Task complete.','清洗后的杯子已放置, 任务完成.']],skills:[{steps:[2],reason:['The source conflicts with the observed mug location.','拿取来源与观测到的杯子位置不符.'],skill:['Ground the pickup source in the latest observation: take the mug from cabinet 1.','根据最近的观测选择拿取来源: 从 cabinet 1 拿取杯子.']},{steps:[4],reason:['Cleaning was attempted with a cabinet, not a sink.','尝试用柜子清洗杯子, 但柜子不是水槽.'],skill:['Carry the mug to a sinkbasin before issuing the clean action.','先将杯子带到 sinkbasin, 再执行 clean 动作.']}]},
- failure:{goal:['Put a clean mug on the dining table.','把清洗后的杯子放到餐桌上.'],outcome:false,actions:['go to cabinet 1','take mug 1 from cabinet 1','go to diningtable 1','put mug 1 in/on diningtable 1','look','go to sinkbasin 1','look','finish'],feedback:[['A mug is inside the cabinet.','柜子中有一个杯子.'],['You pick up the mug.','拿起了杯子.'],['You arrive at the table.','来到餐桌.'],['Mug placed; it is still dirty.','杯子已放置, 但仍未清洗.'],['The dirty mug is on the table.','桌上是一个未清洗的杯子.'],['You reach the sink empty-handed.','空手来到水槽.'],['No mug is being carried.','当前未持有杯子.'],['Goal unmet: the mug is not clean.','任务未完成: 杯子未清洗.']],skills:[{steps:[4,8],reason:['The agent places a dirty mug and terminates before satisfying the clean condition.','智能体放置了未清洗的杯子, 并在满足清洗条件前结束.'],skill:['Verify all goal predicates before placing the mug and finishing: carry it to the sink, clean it, then place it.','放置杯子和结束任务前检查全部目标条件: 将杯子带到水槽, 清洗, 再放到餐桌.']}]},
- clean:{goal:['Put the mug on the dining table.','把杯子放到餐桌上.'],outcome:true,actions:['go to cabinet 1','take mug 1 from cabinet 1','go to diningtable 1','put mug 1 in/on diningtable 1'],feedback:[['A mug is inside the cabinet.','柜子中有一个杯子.'],['You pick up the mug.','拿起了杯子.'],['You arrive at the table.','来到餐桌.'],['Mug placed. Task complete.','杯子已放置, 任务完成.']],skills:[]}
+// Recorded training rollouts. The English observations and Analyzer fields come from the saved logs.
+const scenarioTranslations = {
+  success: {
+    goal: '把两支铅笔放到架子上。',
+    reasons: [
+      '第 5、6 步反复尝试前往 shelf 2，反馈均为“没有发生变化”；第 7 步才转向其他架子。',
+      '第 10—12 步拿起并搬运的是钢笔，不是任务要求的铅笔，浪费了交互。',
+      '第 20 步尚未到 shelf 4 就尝试放置铅笔，没有发生变化；第 21 步前往 shelf 4 后，第 22 步才完成放置。',
+    ],
+    skills: [
+      '导航返回“没有发生变化”时，不要反复尝试同一目的地；转而检查尚未访问的容器。',
+      '寻找目标物品时，不要拿取和搬运钢笔等无关物品，应优先寻找并放置任务要求的铅笔。',
+      '放置物品前，先前往目标容器；当前位置不对时直接尝试放置不会生效。',
+    ],
+  },
+  failure: {
+    goal: '寻找可机洗、棉氨纶材质、经典版型、短袖、navy 色、S 码、低于 40 美元的男士正装衬衫。',
+    reasons: [
+      '第 1 步选中的是女式毛衣，与男士正装衬衫及其材质、版型和袖长要求明显不符。',
+      '第 4 步点击购买时，商品标题仍标明是女式毛衣，而不是要求的男士正装衬衫。',
+    ],
+    skills: [
+      '如果搜索结果大多不相关，不要直接点进第一个结果；应调整搜索词或继续寻找更匹配的商品。',
+      '点击购买前，确认商品标题中的性别和类别符合要求；若显示其他类别或性别，应返回搜索。',
+    ],
+  },
+  clean: { goal: '寻找可机洗、长袖、charcoal heather 色、4X 大码、低于 40 美元的男士 T 恤。', reasons: [], skills: [] },
 };
-let scenario='success', selectedStep=0, generatedKey='', analyzerPosition=0, lastBridgeBucket=-1;
+function summarizeRecordedObservation(value, lang) {
+  const zh=lang==='zh';
+  const reward=value.match(/^Rollout ended · episode reward (.+)$/);
+  if(reward)return zh?`轨迹结束 · 回报 ${reward[1]}`:value;
+  const parts=value.split(' [SEP] ').map(part=>part.replace(/^'|'$/g,''));
+  const price=parts.findIndex(part=>part.startsWith('Price: '));
+  if(price>0)return `${zh?'商品页摘录':'Product page excerpt'} · ${parts[price-1]} · ${parts[price]}`;
+  const firstProduct=parts.findIndex(part=>/^[A-Z0-9]{10}$/.test(part));
+  if(firstProduct>=0){
+    const items=[];
+    for(let i=firstProduct;i<parts.length-2&&items.length<2;i++){
+      if(/^[A-Z0-9]{10}$/.test(parts[i]))items.push(`${parts[i+1]} · ${parts[i+2]}`);
+    }
+    return `${zh?'搜索结果摘录':'Search results excerpt'} · ${items.join(' / ')}`;
+  }
+  return `${zh?'页面摘录':'Page excerpt'} · ${parts.slice(0,3).join(' · ')}`;
+}
+function translateAlfWorldObservation(value) {
+  let match;
+  if((match=value.match(/^Rollout ended · episode reward (.+)$/)))return `轨迹结束 · 回报 ${match[1]}`;
+  if(value==='Nothing happens.')return '没有发生变化。';
+  if((match=value.match(/^You arrive at (.+?)\. On the .+?, you see (.+)\.$/)))return match[2]==='nothing'?`你来到 ${match[1]}，这里没有物品。`:`你来到 ${match[1]}，看到：${match[2].replace(/\b(?:a|an) (?=[a-z])/g,'').replace(/, and /g,'、').replace(/, /g,'、')}。`;
+  if((match=value.match(/^You arrive at (.+?)\. The .+? is (closed|open)\.$/)))return `你来到 ${match[1]}，它是${match[2]==='closed'?'关闭':'打开'}的。`;
+  if((match=value.match(/^You pick up the (.+?) from the (.+?)\.$/)))return `你从 ${match[2]} 拿起 ${match[1]}。`;
+  if((match=value.match(/^You move the (.+?) to the (.+?)\.$/)))return `你把 ${match[1]} 放到 ${match[2]}。`;
+  return value;
+}
+const scenarios = Object.fromEntries(Object.entries(recordedAnalyzerExamples).map(([name, record]) => {
+  const translated = scenarioTranslations[name];
+  const alfWorld=record.source.environment==='ALFWorld';
+  return [name, {
+    source: record.source,
+    goal: [record.goal, translated.goal],
+    outcome: record.outcome,
+    actions: record.actions,
+    feedback: record.feedback.map(value => alfWorld?[value,translateAlfWorldObservation(value)]:[summarizeRecordedObservation(value,'en'),summarizeRecordedObservation(value,'zh')]),
+    skills: record.skills.map((skill, index) => ({
+      steps: skill.target_steps,
+      reason: [skill.error_reason, translated.reasons[index]],
+      skill: [skill.skill, translated.skills[index]],
+    })),
+  }];
+}));
+let scenario='success', selectedStep=-1, generatedKey='', analyzerPosition=0, lastBridgeBucket=-1, lastScanned=-1;
 const getScenario=()=>scenarios[scenario];
 function buildTrajectory() {
-  const data=getScenario(); generatedKey=''; selectedStep=0;
+  const data=getScenario(); generatedKey=''; selectedStep=-1; lastScanned=-1;
   $('.analyzer-goal').textContent=data.goal[language==='zh'?1:0];
+  $('.trajectory-source').textContent=local(`${data.source.environment} · ${data.source.model} · train step ${data.source.training_step}`,`${data.source.environment} · ${data.source.model} · 训练第 ${data.source.training_step} 步`);
   $('.trajectory-outcome').textContent=data.outcome?local('SUCCESS ✓','成功 ✓'):local('FAILURE ×','失败 ×');
   $('.trajectory-outcome').dataset.success=String(data.outcome);
-  $('.reference-copy').textContent=data.outcome?local('Success: inspect its own observations and action feedback.','成功轨迹: 检查自身观测和动作反馈.'):local('Failure: also consult successful action sequences from the same task group.','失败轨迹: 额外参考同任务组内的成功动作序列.');
-  $('.trajectory-list').replaceChildren();$('.mask-cells').replaceChildren();
+  $('.reference-copy').textContent=local('Recorded Analyzer result · step indices start at 0, as in the training log.','真实训练记录中的 Analyzer 结果 · 步骤编号从 0 开始。');
+  $('.trajectory-list').replaceChildren();$('.trajectory-list').scrollTop=0;$('.mask-cells').replaceChildren();
   data.actions.forEach((action,i)=>{
-    const button=document.createElement('button');button.type='button';button.className='trajectory-step';button.dataset.step=i+1;
-    const num=document.createElement('span');num.className='trajectory-number';num.textContent=String(i+1).padStart(2,'0');
+    const button=document.createElement('button');button.type='button';button.className='trajectory-step';button.dataset.step=i;
+    const num=document.createElement('span');num.className='trajectory-number';num.textContent=String(i).padStart(2,'0');
     const main=document.createElement('span');main.className='trajectory-step-body';const code=document.createElement('code');code.textContent=action;
     const feedback=document.createElement('span');feedback.textContent=data.feedback[i][language==='zh'?1:0];main.append(code,feedback);
     const status=document.createElement('span');status.className='trajectory-step-status';status.setAttribute('aria-hidden','true');
-    button.append(num,main,status);button.addEventListener('click',()=>{analyzerPlayer.pause();selectedStep=i+1;inspectStep();});
+    button.append(num,main,status);button.addEventListener('click',()=>{analyzerPlayer.pause();selectedStep=i;inspectStep();});
     $('.trajectory-list').append(button);
-    const cell=document.createElement('span');cell.title=`t = ${i+1}`;cell.dataset.step=i+1;cell.innerHTML=`<small>${i+1}</small><b>0</b>`;$('.mask-cells').append(cell);
+    const cell=document.createElement('span');cell.title=`t = ${i}`;cell.dataset.step=i;cell.innerHTML=`<small>${i}</small><b>0</b>`;$('.mask-cells').append(cell);
   });
   $$('[data-scenario]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.scenario===scenario)));
 }
 function inspectStep() {
   const data=getScenario(), lang=language==='zh'?1:0;
-  if (!selectedStep) {$('.inspector-copy').textContent=local('Watch the scan, or select a step to inspect its corrective signal.','观看分析动画, 或点击某一步查看对应纠错信号.');return;}
+  if (selectedStep < 0) {$('.inspector-copy').textContent=local('Watch the scan, or select a step to inspect its corrective signal.','观看分析动画, 或点击某一步查看对应纠错信号.');$$('.trajectory-step').forEach(b=>b.setAttribute('aria-pressed','false'));$$('.generated-skill').forEach(card=>card.classList.remove('is-focused'));return;}
   const skill=data.skills.find(s=>s.steps.includes(selectedStep));
   $('.inspector-copy').textContent=skill?local(`Step ${selectedStep} · selected for correction. `,`步骤 ${selectedStep} · 选中并纠正. `)+skill.skill[lang]:local(`Step ${selectedStep} · mₜ = 0. Ordinary RL still applies; no auxiliary distillation is assigned.`,`步骤 ${selectedStep} · mₜ = 0. 仍参与普通 RL, 不分配辅助蒸馏.`);
   $$('.trajectory-step').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.step)===selectedStep)));
@@ -95,7 +162,23 @@ function renderAnalyzer(position) {
   const data=getScenario(), n=data.actions.length, scanned=Math.min(n,Math.floor(position/.53*n)), progress=Math.max(0,(position-.55)/.43);
   const revealed=data.skills.filter((s,i)=>progress>=(i+.05)/Math.max(1,data.skills.length));
   const allSelected=data.skills.flatMap(s=>s.steps), done=position>=.99;
-  $$('.trajectory-step').forEach((b,i)=>{const scannedStep=i<scanned;b.classList.toggle('is-scanning',!done&&i===scanned);b.classList.toggle('is-scanned',scannedStep);b.classList.toggle('is-error',scannedStep&&allSelected.includes(i+1));b.querySelector('.trajectory-step-status').textContent=scannedStep?(allSelected.includes(i+1)?'!':'✓'):'';});
+  $$('.trajectory-step').forEach((b,i)=>{const scannedStep=i<scanned;b.classList.toggle('is-scanning',!done&&i===scanned);b.classList.toggle('is-scanned',scannedStep);b.classList.toggle('is-error',scannedStep&&allSelected.includes(i));b.querySelector('.trajectory-step-status').textContent=scannedStep?(allSelected.includes(i)?'!':'·'):'';});
+  if (scanned !== lastScanned && scanned < n && position < .55) {
+    lastScanned=scanned;
+    const list=$('.trajectory-list'), active=list.children[scanned];
+    if (active) {
+      const listRect=list.getBoundingClientRect(), stepRect=active.getBoundingClientRect();
+      if (stepRect.bottom > listRect.bottom - 14) list.scrollTop += stepRect.bottom - listRect.bottom + 14;
+      else if (stepRect.top < listRect.top + 14) list.scrollTop -= listRect.top - stepRect.top + 14;
+    }
+  } else if (scanned === n && lastScanned !== n) {
+    lastScanned=n;
+    const firstTarget=data.skills[0]?.steps[0], list=$('.trajectory-list');
+    if (firstTarget !== undefined) {
+      const target=list.querySelector(`[data-step="${firstTarget}"]`);
+      if (target) list.scrollTop += target.getBoundingClientRect().top - list.getBoundingClientRect().top - list.clientHeight*.25;
+    }
+  }
   $('.analyzer-status').textContent=done?local('COMPLETE','已完成'):position<.53?local('SCANNING','读取轨迹'):local('WRITING SKILLS','生成技能');
   $('.analysis-progress-label').textContent=`${String(scanned).padStart(2,'0')} / ${String(n).padStart(2,'0')}`;
   $('#analysis-position').value=String(position);
@@ -105,7 +188,7 @@ function renderAnalyzer(position) {
     generatedKey=key;
     const container=$('.skill-content');container.replaceChildren();
     if (progress<=0) {const pending=document.createElement('div');pending.className='skill-pending';pending.innerHTML='<span class="thinking-dots" aria-hidden="true"><i></i><i></i><i></i></span>';const p=document.createElement('p');p.textContent=position<.01?local('Ready to inspect experience.','准备分析交互经验.'):local(`Reading observations and feedback · ${scanned}/${n}`,`读取观测和反馈 · ${scanned}/${n}`);pending.append(p);container.append(pending);}
-    else if (!data.skills.length) {const empty=document.createElement('div');empty.className='empty-skills';empty.innerHTML='<span aria-hidden="true">✓</span>';const h=document.createElement('strong');h.textContent=local('No supported error.','没有充分支持的错误.');const p=document.createElement('p');p.textContent=local('skills = [] → all mₜ = 0. Keep ordinary RL; add no corrective loss.','skills = [] → 全部 mₜ = 0. 保留普通 RL, 不添加纠错损失.');empty.append(h,p);container.append(empty);}
+    else if (!data.skills.length) {const empty=document.createElement('div');empty.className='empty-skills';empty.innerHTML='<span aria-hidden="true">✓</span>';const h=document.createElement('strong');h.textContent=local('No skill returned.','Analyzer 未生成 skill。');const p=document.createElement('p');p.textContent=local('step_skills = [] → all mₜ = 0. Ordinary RL remains active.','step_skills = [] → 全部 mₜ = 0，仍参与普通 RL。');empty.append(h,p);container.append(empty);}
     else revealed.forEach((s,i)=>{
       const card=document.createElement('article');card.className='generated-skill';card.dataset.targets=s.steps.join(',');
       const top=document.createElement('div');top.className='generated-skill-top';top.innerHTML=`<span>skill_${i+1}</span><strong>target_steps: [${s.steps.join(', ')}]</strong>`;
@@ -114,7 +197,7 @@ function renderAnalyzer(position) {
       const pct=Math.min(1,Math.max(0,(progress*data.skills.length-i)*1.25));text.textContent=s.skill[lang].slice(0,Math.floor(pct*s.skill[lang].length));if(pct<1)text.classList.add('is-typing');
       card.append(top,evidence,text);container.append(card);
     });
-    if (selectedStep)inspectStep();
+    if (selectedStep >= 0)inspectStep();
   }
   $$('.generated-skill').forEach((card,i)=>{
     const skill=revealed[i];
@@ -139,14 +222,17 @@ function updateAnalyzerLinks(skills) {
     if(!svg){svg=svgElement('svg',{class:'analyzer-bridge','aria-hidden':'true'});$('.analyzer-grid').append(svg);}
     svg.replaceChildren();
     if(matchMedia('(max-width: 820px)').matches)return;
-    const area=$('.analyzer-grid').getBoundingClientRect();
+    const area=$('.analyzer-grid').getBoundingClientRect(), visibleList=$('.trajectory-list').getBoundingClientRect();
     svg.setAttribute('viewBox',`0 0 ${area.width} ${area.height}`);
     const cards=$$('.generated-skill');
     skills.forEach((skill,i)=>{
       if(!cards[i])return;
       const end=cards[i].getBoundingClientRect();
       skill.steps.forEach(step=>{
-        const start=$(`.trajectory-step[data-step="${step}"]`).getBoundingClientRect();
+        const target=$(`.trajectory-step[data-step="${step}"]`);
+        if(!target)return;
+        const start=target.getBoundingClientRect(), center=start.top+start.height/2;
+        if(center<visibleList.top || center>visibleList.bottom)return;
         const x1=start.right-area.left+3,y1=start.top+start.height/2-area.top,x2=end.left-area.left-5,y2=end.top+26-area.top;
         const d=`M${x1} ${y1}C${x1+38} ${y1},${x2-38} ${y2},${x2} ${y2}`;
         svg.append(svgElement('path',{d,class:'bridge-base'}),svgElement('path',{d,class:'bridge-packet',pathLength:100}),svgElement('circle',{cx:x1,cy:y1,r:3}),svgElement('circle',{cx:x2,cy:y2,r:3}));
@@ -155,10 +241,11 @@ function updateAnalyzerLinks(skills) {
   });
 }
 window.addEventListener('resize',()=>updateAnalyzerLinks(getScenario().skills),{passive:true});
-const analyzerPlayer=player($('#panel-analyzer'),16000,renderAnalyzer,$('.analyzer-play'),['play','pause','replay']);
+$('.trajectory-list').addEventListener('scroll',()=>updateAnalyzerLinks(getScenario().skills),{passive:true});
+const analyzerPlayer=player($('#panel-analyzer'),()=>scenario==='failure'?16000:scenario==='success'?24000:16000,renderAnalyzer,$('.analyzer-play'),['play','pause','replay']);
 $$('[data-scenario]').forEach(b=>b.addEventListener('click',()=>{scenario=b.dataset.scenario;analyzerPlayer.pause();buildTrajectory();analyzerPlayer.seek(0);inspectStep();if(effects)analyzerPlayer.play();else analyzerPlayer.seek(1);}));
 $('#analysis-position').addEventListener('input',e=>analyzerPlayer.seek(Number(e.target.value)));
-$('.analysis-restart').addEventListener('click',()=>{selectedStep=0;analyzerPlayer.seek(0);inspectStep();analyzerPlayer.play();});
+$('.analysis-restart').addEventListener('click',()=>{selectedStep=-1;$('.trajectory-list').scrollTop=0;lastScanned=-1;analyzerPlayer.seek(0);inspectStep();analyzerPlayer.play();});
 
 // Exact analytical coefficient; the UI reports the coefficient, not tanh's derivative.
 let alpha=2.5,bound=1,gap=.6,selected=true,coefficientGraphKey='';
