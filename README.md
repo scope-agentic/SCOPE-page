@@ -4,7 +4,7 @@ Bilingual academic project page for **SCOPE: Selective Critical-Step On-Policy S
 
 Anonymous project repository: https://github.com/scope-agentic/SCOPE-page
 
-This version preserves anonymous author information. The page includes full experiment tables for three backbones, an interactive method walkthrough, and ALFWorld / WebShop trajectory replays. Each replay gallery contains four successful and two failed recorded episodes. ALFWorld scenes are text-based 3D reconstructions; WebShop illustrations are schematic.
+This anonymous edition presents the method, experimental tables for four backbones (including Qwen3-32B), component ablations, error-step localization, parameter sensitivity, and ALFWorld / WebShop trajectory replays. Each replay gallery contains four successful and two failed recorded episodes. ALFWorld scenes are text-based 3D reconstructions; WebShop illustrations are schematic.
 
 ## Preview locally
 
@@ -16,15 +16,15 @@ Open http://127.0.0.1:8000/. Use an HTTP server rather than opening index.html d
 
 ## Maintain
 
-- `config.js`: anonymous author state and the public code repository link.
+- `config.js`: the anonymous code repository link.
 - `content.js` and `index.html`: bilingual copy and default English content.
 - `data.js`: complete main experimental results.
 - `method/`: interactive method walkthrough.
 - `replay/`: ALFWorld playback, scene configuration, and curated episode data.
 - `webshop/`: WebShop playback and curated episode data.
-- `assets/`: research figures, local models, textures, illustrations, and vendored Three.js.
+- `assets/`: method and result figures, local 3D assets, textures, illustrations, and vendored Three.js.
 
-Keep the directory structure intact. All runtime assets use relative URLs, supporting the `/SCOPE-page/` project path. Raw source trajectory HTML, authoring scripts, and local caches are excluded from this publication checkout. Research figures come from the provided SCOPE materials. Manuscript files are kept outside the public website directory.
+Keep the directory structure intact. All runtime assets use relative URLs, supporting the `/SCOPE-page/` project path. Raw source trajectory HTML, authoring scripts, and local caches are excluded from this publication checkout. No manuscript, external model or dataset link, experiment-log link, or training-curve asset is included.
 
 ## Deployment
 
@@ -41,10 +41,12 @@ The `experience/` directory adds the visual layer and the three mechanism demos:
 - Ambient particles, a fading pointer trail, a reading-progress line, and a persistent effects toggle. Decorative motion respects reduced-motion settings; the trail runs only for precise pointers.
 - A visibility-aware Analyzer walkthrough with success, failure, and empty-selection examples. Each generated skill connects to its target steps and updates the auxiliary selection mask. These are explicitly illustrative examples, separate from recorded replays.
 - An analytical bounded signed OPSD explorer: alpha 1 / 2.5 / 5, bound 0.1 / 1 / 10, signed gap, and selection mask. The released defaults are alpha 2.5 and bound 1. The coefficient uses stop-gradient; the displayed curve is not the derivative of tanh.
-- A pairwise length explorer with default temperature 0.1, adjustable successful trajectory lengths, and common length rescaling. The fixed-horizon absolute bonus is explicitly an illustrative mathematical comparison. Ablation figures follow the supplied results, Table 2: Qwen2.5-3B at step 180 (93.0 / 97.7 / 98.4 percent).
+- A pairwise length explorer with default temperature 0.1, adjustable successful trajectory lengths, and common length rescaling. The fixed-horizon absolute bonus is an illustrative mathematical comparison. The component ablation table reports Qwen2.5-3B results at step 180.
 - Animated benchmark bars using `data.js`, synchronized with the existing three-backbone results table. Methods can be toggled; keyboard focus or a tap exposes each value.
+- A separate Qwen3-32B ALFWorld table compares SCOPE and GRPO on seen and unseen tasks. Results are also summarized in three large metric cards.
+- Error-step localization, unseen-task generalization, and parameter sensitivity are shown without training dynamics.
 
-Copy is bilingual. All additions are dependency-free, use relative asset paths, and work on GitHub Pages without a build step. `config.js` stores the anonymous release settings and organization code link. The supplied mascot is used in the navigation, hero wordmark, and favicon.
+Copy is bilingual. All additions are dependency-free, use relative asset paths, and work on GitHub Pages without a build step. `config.js` points only to the organization code repository. The supplied mascot is used in the navigation, hero wordmark, and favicon.
 
 ### Motivation, reading and automatic playback
 
@@ -54,8 +56,8 @@ Copy is bilingual. All additions are dependency-free, use relative asset paths, 
 - `experience/refinements.css` unifies reading sizes and separates the navigation's active dot from the reading-progress line.
 - Every WebShop episode has a full `taskZh` translation. Original task strings, actions and observations remain intact.
 
-### Presentation and manuscript access
+### Anonymous publication
 
-The public page has no manuscript link, embedded manuscript, or manuscript file. Reference PDFs belong outside this website directory. Do not copy them into a Pages deployment. Explanatory animation notes remain in these maintenance instructions rather than in the visitor-facing presentation.
+The page contains no author names, affiliations, email addresses, manuscript link or file, model or dataset download link, experiment-log link, or training-curve figure. The only research repository link points to `scope-agentic/SCOPE-code`.
 
 `experience/navigation.js` maintains the left contents list while scrolling; on narrow screens it becomes an expandable contents control. Clicking or keyboard-activating the SCOPE wordmark emits a short particle burst when effects are enabled.

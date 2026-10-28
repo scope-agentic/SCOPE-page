@@ -108,24 +108,6 @@
   }
 
   function renderPublicInfo() {
-    const authors = $('#authors');
-    if (!config.anonymous && config.authors.length) {
-      authors.replaceChildren();
-      config.authors.forEach((author, index) => {
-        if (index) authors.append(' · ');
-        const url = safeWebUrl(author.url);
-        const name = document.createElement(url ? 'a' : 'span');
-        name.textContent = author.name;
-        if (url) { name.href = url; name.target = '_blank'; name.rel = 'noopener'; }
-        authors.append(name);
-        if (author.affiliation) {
-          const affiliation = document.createElement('span');
-          affiliation.className = 'author-affiliation';
-          affiliation.textContent = author.affiliation;
-          authors.append(affiliation);
-        }
-      });
-    } else authors.textContent = t('authors');
     $$('[data-public-resource]').forEach((link) => link.remove());
     const codeUrl = safeWebUrl(config.codeUrl);
     if (codeUrl) {
@@ -138,7 +120,6 @@
       link.textContent = `${t('code')} ↗`;
       $('#resource-links').append(link);
     }
-    if (!config.anonymous) $('#publication-status').textContent = language === 'zh' ? '研究项目主页' : 'Research project';
   }
 
   function applyLanguage(nextLanguage, preservePosition = false) {
